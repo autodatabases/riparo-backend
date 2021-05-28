@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  secrets-manager:
+    API_SECRET: $SECRET_ARN:API_SECRET
+    SMTP_USERNAME: $SECRET_ARN:SMTP_USERNAME
+    SMTP_PASSWORD: $SECRET_ARN:SMTP_PASSWORD
+    DB_NAME: $SECRET_ARN:DB_NAME
+    DB_USER: $SECRET_ARN:DB_USER
+    DB_PASSWORD: $SECRET_ARN:DB_PASSWORD
+    DB_HOST: $SECRET_ARN:DB_HOST
+
+phases:
+  install:
+    commands:
+      - curl -sL https://deb.nodesource.com/setup_14.x
+  pre_build:
+    commands:
+      - (cd deployment-config && mkdir app-backend)
+      - (bash deployment-config/scripts/copy_files.sh) ## Move package into deployment-config folder
+  post_build:
+    commands:
+      - node deployment-config/environment_setter.js && mv .env deployment-config/app-backend/
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: deployment-config/

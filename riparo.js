@@ -14,17 +14,12 @@ var cors = require("cors");
 var app = express();
 var http = require("http").createServer(app);
 
+// Constants
+const constants = require("./constants");
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-
-// setting jw access key
-process.env.API_SECRET =
-  "RQq0k95yeHJ5h0AEHy7A8bEAgfWrx3dJEdmAbX9Nvo9Scbq6bwQj9ksF5QMlfijv";
-
-// EMAIL SMTP CREDENTIALS
-process.env.SMTP_USERNAME = "chandansmtp@gmail.com";
-process.env.SMTP_PASSWORD = "yowhlgoqgoykovhr";
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -68,4 +63,6 @@ app.use(function(err, req, res, next) {
 });*/
 
 module.exports = app;
-http.listen(6662, () => console.log("app listening on port 6662!"));
+http.listen(constants.PORT, () =>
+  console.log(`app listening on port ${constants.PORT}!`)
+);

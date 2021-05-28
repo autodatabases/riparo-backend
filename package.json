@@ -7,6 +7,7 @@
     "cors": "^2.8.5",
     "csv-parse": "^4.9.0",
     "dateformat": "^3.0.3",
+    "dotenv": "^10.0.0",
     "epayco-sdk-node": "^1.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",

@@ -26,523 +26,501 @@ module.exports = function (app) {
   /**********  AUTH APIS  ******************/
 
   //dashboard
-  app.route("/api/admin-dashboard").get(api.getAdminDashboard);
+  app.route("/admin-dashboard").get(api.getAdminDashboard);
 
   //login
-  app.route("/api/login").post(api.logIn);
+  app.route("/login").post(api.logIn);
 
   // social login
-  app.route("/api/social-login").post(api.socialLogIn);
+  app.route("/social-login").post(api.socialLogIn);
 
   // logout
-  app.route("/api/logout").post(apiToken, api.logOut);
+  app.route("/logout").post(apiToken, api.logOut);
 
   // profile
-  app.route("/api/me").get(apiToken, api.getProfile);
+  app.route("/me").get(apiToken, api.getProfile);
 
   // profile ( token )
-  app.route("/api/me/token").get(api.getProfileByToken);
+  app.route("/me/token").get(api.getProfileByToken);
 
   // update user content
-  app.route("/api/user-content").put(apiToken, api.updateUserContent);
+  app.route("/user-content").put(apiToken, api.updateUserContent);
 
   // update user content
-  app.route("/api/user-content-id").put(apiToken, api.updateUserContentById);
+  app.route("/user-content-id").put(apiToken, api.updateUserContentById);
 
   // change password
-  app.route("/api/change-password").put(apiToken, api.changePassword);
+  app.route("/change-password").put(apiToken, api.changePassword);
 
   // change password by token
-  app.route("/api/change-password-token").put(api.changePasswordByToken);
+  app.route("/change-password-token").put(api.changePasswordByToken);
 
   // all supplier types
-  app.route("/api/all-supplier-types").get(api.allSupplierTypes);
+  app.route("/all-supplier-types").get(api.allSupplierTypes);
 
   // all currencies
-  app.route("/api/all-currencies").get(api.allCurrencies);
+  app.route("/all-currencies").get(api.allCurrencies);
 
   // all countries
-  app.route("/api/all-countries").get(api.allCountries);
+  app.route("/all-countries").get(api.allCountries);
 
   // all freight zones
-  app.route("/api/freight-zones").get(api.allFreightZones);
+  app.route("/freight-zones").get(api.allFreightZones);
 
   // add
-  app.route("/api/freight-zone").post(apiToken, api.addZone);
+  app.route("/freight-zone").post(apiToken, api.addZone);
 
   // update
-  app.route("/api/freight-zone/:id").put(apiToken, api.updateZone);
+  app.route("/freight-zone/:id").put(apiToken, api.updateZone);
 
   // delete
-  app.route("/api/freight-zone/:id").delete(apiToken, api.deleteZone);
+  app.route("/freight-zone/:id").delete(apiToken, api.deleteZone);
 
   // get
-  app.route("/api/freight-zone/:id").get(apiToken, api.getZone);
+  app.route("/freight-zone/:id").get(apiToken, api.getZone);
 
   // all shipping insurances
-  app.route("/api/shipping-insurances").get(api.allShippingInsurances);
+  app.route("/shipping-insurances").get(api.allShippingInsurances);
 
   /**********  ZONE PRICING  ******************/
 
   // import runt db
-  app.route("/api/import-zone-pricing").post(apiToken, api.importZonePricing);
+  app.route("/import-zone-pricing").post(apiToken, api.importZonePricing);
 
   // all
-  app.route("/api/zone-pricing").get(api.allZonePricing);
+  app.route("/zone-pricing").get(api.allZonePricing);
 
   /**********  ZONE COUNTRIES  ******************/
 
   // import runt db
-  app
-    .route("/api/import-zone-countries")
-    .post(apiToken, api.importZoneCountries);
+  app.route("/import-zone-countries").post(apiToken, api.importZoneCountries);
 
   // all
-  app.route("/api/zone-countries").get(api.allZoneCountries);
+  app.route("/zone-countries").get(api.allZoneCountries);
 
   // add zone country
-  app.route("/api/zone-countries").post(apiToken, api.addZoneCountries);
+  app.route("/zone-countries").post(apiToken, api.addZoneCountries);
 
   // update zone-countries
-  app.route("/api/zone-countries/:id").put(apiToken, api.updateZoneCountries);
+  app.route("/zone-countries/:id").put(apiToken, api.updateZoneCountries);
 
   // get singe zone-countries
-  app.route("/api/zone-countries/:id").get(apiToken, api.getZoneCountries);
+  app.route("/zone-countries/:id").get(apiToken, api.getZoneCountries);
 
   // get singe zone by country name
-  app.route("/api/zone-by-countries/:id").get(api.getZoneByCountry);
+  app.route("/zone-by-countries/:id").get(api.getZoneByCountry);
 
   // get cat sub by name
-  app.route("/api/cat-sub-name").get(api.getCatSubByName);
+  app.route("/cat-sub-name").get(api.getCatSubByName);
 
   // add zone pricing
-  app.route("/api/zone-pricing").post(apiToken, api.addZonePricing);
+  app.route("/zone-pricing").post(apiToken, api.addZonePricing);
 
   // update zone-pricing
-  app.route("/api/zone-pricing/:id").put(apiToken, api.updateZonePricing);
+  app.route("/zone-pricing/:id").put(apiToken, api.updateZonePricing);
 
   // get singe zone-pricing
-  app.route("/api/zone-pricing/:id").get(apiToken, api.getZonePricing);
+  app.route("/zone-pricing/:id").get(apiToken, api.getZonePricing);
 
   // get singe zone-pricing by shipment
-  app.route("/api/zone-pricing-shipment").get(api.getZonePricingByShipment);
+  app.route("/zone-pricing-shipment").get(api.getZonePricingByShipment);
 
   // get Article Price Cat Sub
-  app.route("/api/get-article-cat-sub").get(api.getArticlePriceByCatSub);
+  app.route("/get-article-cat-sub").get(api.getArticlePriceByCatSub);
 
   // get Article Price Cat Sub
-  app.route("/api/get-article-cat-sub-all").get(api.getArticlePriceByCatSubAll);
+  app.route("/get-article-cat-sub-all").get(api.getArticlePriceByCatSubAll);
 
   // get Article Price Cat Sub
-  app
-    .route("/api/get-article-cat-sub-one/:id")
-    .get(api.getArticlePriceByCatSubOne);
+  app.route("/get-article-cat-sub-one/:id").get(api.getArticlePriceByCatSubOne);
 
   // update edit-article-cat-sub
   app
-    .route("/api/edit-article-cat-sub/:id")
+    .route("/edit-article-cat-sub/:id")
     .put(apiToken, api.updateArticlePriceByCatSub);
 
   // get Article Price Cat Sub
-  app.route("/api/article-cat-sub").put(api.articlePriceByCatSub);
+  app.route("/article-cat-sub").put(api.articlePriceByCatSub);
 
   // add insurance-pricing
-  app.route("/api/insurance-pricing").post(apiToken, api.addInsurancePricing);
+  app.route("/insurance-pricing").post(apiToken, api.addInsurancePricing);
 
   // update insurance-pricing
-  app
-    .route("/api/insurance-pricing/:id")
-    .put(apiToken, api.updateInsurancePricing);
+  app.route("/insurance-pricing/:id").put(apiToken, api.updateInsurancePricing);
 
   // get singe insurance-pricing
-  app
-    .route("/api/insurance-pricing/:id")
-    .get(apiToken, api.getInsurancePricing);
+  app.route("/insurance-pricing/:id").get(apiToken, api.getInsurancePricing);
 
   // get singe insurance-pricing
-  app.route("/api/insurance-pricing").get(apiToken, api.allInsurancePricing);
+  app.route("/insurance-pricing").get(apiToken, api.allInsurancePricing);
 
   /**********  RIPARO FRIEND CATEGORIES  ******************/
 
   // add
-  app.route("/api/rf-category").post(apiToken, api.addRfCategory);
+  app.route("/rf-category").post(apiToken, api.addRfCategory);
 
   // update
-  app.route("/api/rf-category/:id").put(apiToken, api.updateRfCategory);
+  app.route("/rf-category/:id").put(apiToken, api.updateRfCategory);
 
   // delete
-  app.route("/api/rf-category/:id").delete(apiToken, api.deleteRfCategory);
+  app.route("/rf-category/:id").delete(apiToken, api.deleteRfCategory);
 
   // get
-  app.route("/api/rf-category/:id").get(apiToken, api.getRfCategory);
+  app.route("/rf-category/:id").get(apiToken, api.getRfCategory);
 
   // all
-  app.route("/api/all-rf-categories").get(api.allRfCategories);
+  app.route("/all-rf-categories").get(api.allRfCategories);
 
   /**********  FAQS CATEGORIES  ******************/
 
   // add
-  app.route("/api/faq-category").post(apiToken, faq.addFaqCategory);
+  app.route("/faq-category").post(apiToken, faq.addFaqCategory);
 
   // update
-  app.route("/api/faq-category/:id").put(apiToken, faq.updateFaqCategory);
+  app.route("/faq-category/:id").put(apiToken, faq.updateFaqCategory);
 
   // delete
-  app.route("/api/faq-category/:id").delete(apiToken, faq.deleteFaqCategory);
+  app.route("/faq-category/:id").delete(apiToken, faq.deleteFaqCategory);
 
   // get
-  app.route("/api/faq-category/:id").get(apiToken, faq.getFaqCategory);
+  app.route("/faq-category/:id").get(apiToken, faq.getFaqCategory);
 
   // all
-  app.route("/api/all-faq-categories").get(faq.allFaqCategories);
+  app.route("/all-faq-categories").get(faq.allFaqCategories);
 
   /**********  SLIDERS  ******************/
 
   // add
-  app.route("/api/slider").post(apiToken, api.addSlider);
+  app.route("/slider").post(apiToken, api.addSlider);
 
   // all
-  app.route("/api/sliders").get(api.allSliders);
+  app.route("/sliders").get(api.allSliders);
 
   /**********  SETTINGS  ******************/
 
   // get website content
-  app.route("/api/website-content").get(api.getWebsiteContent);
+  app.route("/website-content").get(api.getWebsiteContent);
 
   // update membership option
-  app.route("/api/website-content").put(apiToken, api.updateWebsiteContent);
+  app.route("/website-content").put(apiToken, api.updateWebsiteContent);
 
   //----------------------------------------------------------------------------------------------
 
   /**********  RUNT DATABASE  ******************/
 
   // import runt db
-  app.route("/api/import-runt").post(apiToken, runt.importRunt);
+  app.route("/import-runt").post(apiToken, runt.importRunt);
 
   // all membership option
-  app.route("/api/runt-db").get(runt.allRuntDb);
+  app.route("/runt-db").get(runt.allRuntDb);
 
   //----------------------------------------------------------------------------------------------
 
   /**********  TECALLIANCE  ******************/
 
   // all categories
-  app
-    .route("/api/tecalliance/categories")
-    .get(tecalliance.tecallianceCategories);
+  app.route("/tecalliance/categories").get(tecalliance.tecallianceCategories);
 
   // feature discount
-  app.route("/api/feature/category/:id").put(tecalliance.featureCategory);
+  app.route("/feature/category/:id").put(tecalliance.featureCategory);
 
   // single categories
-  app
-    .route("/api/tecalliance/category/:id")
-    .get(tecalliance.tecallianceCategory);
+  app.route("/tecalliance/category/:id").get(tecalliance.tecallianceCategory);
 
   // single sub categories
   app
-    .route("/api/tecalliance/sub-category/:id")
+    .route("/tecalliance/sub-category/:id")
     .get(tecalliance.tecallianceSubCategory);
 
   // single categories by shortcut
   app
-    .route("/api/tecalliance/category-name")
+    .route("/tecalliance/category-name")
     .get(tecalliance.tecallianceCategoryByName);
 
   // edit categories
   app
-    .route("/api/tecalliance/category/:id")
+    .route("/tecalliance/category/:id")
     .put(tecalliance.tecallianceEditCategory);
 
   // edit sub categories
   app
-    .route("/api/tecalliance/sub-category/:id")
+    .route("/tecalliance/sub-category/:id")
     .put(tecalliance.tecallianceEditSubCategory);
 
   // single manu
-  app.route("/api/tecalliance/manu/:id").get(tecalliance.tecallianceManu);
+  app.route("/tecalliance/manu/:id").get(tecalliance.tecallianceManu);
 
   // single manu by manuId
-  app.route("/api/tecalliance/manuId/:id").get(tecalliance.tecallianceManuId);
+  app.route("/tecalliance/manuId/:id").get(tecalliance.tecallianceManuId);
 
   // edit categories
-  app.route("/api/tecalliance/manu/:id").put(tecalliance.tecallianceEditManu);
+  app.route("/tecalliance/manu/:id").put(tecalliance.tecallianceEditManu);
 
   // all sub categories
   app
-    .route("/api/tecalliance/sub-categories")
+    .route("/tecalliance/sub-categories")
     .get(tecalliance.tecallianceSubCategories);
 
   // all brands
-  app.route("/api/tecalliance/brands").get(tecalliance.tecallianceAmBrands);
+  app.route("/tecalliance/brands").get(tecalliance.tecallianceAmBrands);
 
   // single manu by brands
   app
-    .route("/api/tecalliance/brands-id")
+    .route("/tecalliance/brands-id")
     .get(tecalliance.tecallianceAmBrandsSingle);
 
   // all manufacturers
   app
-    .route("/api/tecalliance/manufacturers")
+    .route("/tecalliance/manufacturers")
     .get(tecalliance.tecallianceManufacturers);
 
   // all model series
   app
-    .route("/api/tecalliance/model-series")
+    .route("/tecalliance/model-series")
     .get(tecalliance.tecallianceModelSeries);
 
   // tecallianceVehicleIdsByCriteria
   app
-    .route("/api/tecalliance/VehicleIdsByCriteria")
+    .route("/tecalliance/VehicleIdsByCriteria")
     .get(tecalliance.tecallianceVehicleIdsByCriteria);
 
   // getLinkedVehicle
-  app
-    .route("/api/tecalliance/getLinkedVehicle")
-    .post(tecalliance.getLinkedVehicle);
+  app.route("/tecalliance/getLinkedVehicle").post(tecalliance.getLinkedVehicle);
 
   // tecallianceArticles
-  app.route("/api/tecalliance/Articles").get(tecalliance.tecallianceArticles);
+  app.route("/tecalliance/Articles").get(tecalliance.tecallianceArticles);
 
   // update article price
   app
-    .route("/api/tecalliance/edit-article-price/:id")
+    .route("/tecalliance/edit-article-price/:id")
     .put(apiToken, tecalliance.editArticlePrice);
 
   // tecalliance get Article price
   app
-    .route("/api/tecalliance/get-article-price/:id")
+    .route("/tecalliance/get-article-price/:id")
     .get(tecalliance.getArticlePrice);
 
   /**********  TEC ARTICLE PRICING  ******************/
 
   // import
   app
-    .route("/api/import-tec-article-pricing")
+    .route("/import-tec-article-pricing")
     .post(apiToken, api.importTecArticlePricing);
 
   // import tec recommend
   app
-    .route("/api/import-tec-article-recommend")
+    .route("/import-tec-article-recommend")
     .post(apiToken, api.importTecArticleRecommend);
 
   // all
-  app.route("/api/tec-article-pricing").get(api.allTecArticlePricing);
+  app.route("/tec-article-pricing").get(api.allTecArticlePricing);
 
   // all
-  app.route("/api/tec-article-recommend").get(api.allTecArticleRecommend);
+  app.route("/tec-article-recommend").get(api.allTecArticleRecommend);
 
   // one
-  app.route("/api/tec-article/pricing").get(api.tecArticlePricingOne);
+  app.route("/tec-article/pricing").get(api.tecArticlePricingOne);
 
   /**********  B L O G S  ******************/
 
   // add blog
-  app.route("/api/blog").post(apiToken, blog.addBlog);
+  app.route("/blog").post(apiToken, blog.addBlog);
 
   // update blog
-  app.route("/api/blog/:id").put(apiToken, blog.updateBlog);
+  app.route("/blog/:id").put(apiToken, blog.updateBlog);
 
   // get singe blog
-  app.route("/api/blog/:id").get(blog.getBlog);
+  app.route("/blog/:id").get(blog.getBlog);
 
   // all blogs
-  app.route("/api/blogs").get(blog.allBlogs);
+  app.route("/blogs").get(blog.allBlogs);
 
   /**********  RIPARO FRIENDS  ******************/
 
   // add blog
-  app.route("/api/riparo-friend").post(apiToken, riparoFriend.addRf);
+  app.route("/riparo-friend").post(apiToken, riparoFriend.addRf);
 
   // update blog
-  app.route("/api/riparo-friend/:id").put(apiToken, riparoFriend.updateRf);
+  app.route("/riparo-friend/:id").put(apiToken, riparoFriend.updateRf);
 
   // get singe blog
-  app.route("/api/riparo-friend/:id").get(apiToken, riparoFriend.getRf);
+  app.route("/riparo-friend/:id").get(apiToken, riparoFriend.getRf);
 
   // all blogs
-  app.route("/api/riparo-friends").get(apiToken, riparoFriend.allRfs);
+  app.route("/riparo-friends").get(apiToken, riparoFriend.allRfs);
 
   /**********  F A Q S  ******************/
 
   // add faq
-  app.route("/api/faq").post(apiToken, faq.addFaq);
+  app.route("/faq").post(apiToken, faq.addFaq);
 
   // update faq
-  app.route("/api/faq/:id").put(apiToken, faq.updateFaq);
+  app.route("/faq/:id").put(apiToken, faq.updateFaq);
 
   // get singe faq
-  app.route("/api/faq/:id").get(apiToken, faq.getFaq);
+  app.route("/faq/:id").get(apiToken, faq.getFaq);
 
   // all faqs
-  app.route("/api/faqs").get(faq.allFaqs);
+  app.route("/faqs").get(faq.allFaqs);
 
   /**********  P A Y M E N T -  M E T H O D S  ******************/
 
   // update stripe
-  app
-    .route("/api/pm/update/stripe")
-    .put(apiToken, parameterPricing.updateStripe);
+  app.route("/pm/update/stripe").put(apiToken, parameterPricing.updateStripe);
 
   // update paypal
-  app
-    .route("/api/pm/update/paypal")
-    .put(apiToken, parameterPricing.updatePaypal);
+  app.route("/pm/update/paypal").put(apiToken, parameterPricing.updatePaypal);
 
   // all payment methods
   app
-    .route("/api/payment-methods")
+    .route("/payment-methods")
     .get(apiToken, parameterPricing.allPaymentMethods);
 
   /**********  D I S C O U N T S  ******************/
 
   // add discount
-  app.route("/api/discount").post(apiToken, parameterPricing.addDiscount);
+  app.route("/discount").post(apiToken, parameterPricing.addDiscount);
 
   // update discount
-  app.route("/api/discount/:id").put(apiToken, parameterPricing.updateDiscount);
+  app.route("/discount/:id").put(apiToken, parameterPricing.updateDiscount);
 
   // get singe discount
-  app.route("/api/discount/:id").get(apiToken, parameterPricing.getDiscount);
+  app.route("/discount/:id").get(apiToken, parameterPricing.getDiscount);
 
   // get feature discount
-  app.route("/api/feature/discount").get(parameterPricing.getFeatureDiscount);
+  app.route("/feature/discount").get(parameterPricing.getFeatureDiscount);
 
   // feature discount
-  app.route("/api/feature/discount/:id").put(parameterPricing.featureDiscount);
+  app.route("/feature/discount/:id").put(parameterPricing.featureDiscount);
 
   // all discounts
-  app.route("/api/discounts").get(parameterPricing.allDiscounts);
+  app.route("/discounts").get(parameterPricing.allDiscounts);
 
   /**********  CUSTOM DUTIES  ******************/
 
   // add CustomDuties
-  app
-    .route("/api/custom-duties")
-    .post(apiToken, parameterPricing.addCustomDuties);
+  app.route("/custom-duties").post(apiToken, parameterPricing.addCustomDuties);
 
   // update CustomDuties
   app
-    .route("/api/custom-duties/:id")
+    .route("/custom-duties/:id")
     .put(apiToken, parameterPricing.updateCustomDuties);
 
   // get singe CustomDuties
   app
-    .route("/api/custom-duties/:id")
+    .route("/custom-duties/:id")
     .get(apiToken, parameterPricing.getCustomDuties);
 
   // all CustomDuties
-  app.route("/api/custom-duties").get(parameterPricing.allCustomDuties);
+  app.route("/custom-duties").get(parameterPricing.allCustomDuties);
 
   /**********  C A M P A I G N S  ******************/
 
   // add campaign
-  app.route("/api/campaign").post(apiToken, parameterPricing.addCampaign);
+  app.route("/campaign").post(apiToken, parameterPricing.addCampaign);
 
   // update campaign
-  app.route("/api/campaign/:id").put(apiToken, parameterPricing.updateCampaign);
+  app.route("/campaign/:id").put(apiToken, parameterPricing.updateCampaign);
 
   // get singe campaign
-  app.route("/api/campaign/:id").get(apiToken, parameterPricing.getCampaign);
+  app.route("/campaign/:id").get(apiToken, parameterPricing.getCampaign);
 
   // all discounts
-  app.route("/api/campaigns").get(apiToken, parameterPricing.allCampaigns);
+  app.route("/campaigns").get(apiToken, parameterPricing.allCampaigns);
 
   /**********  T A X - M A N A G E M E N T  ******************/
 
   // get website content
-  app.route("/api/tax-mgt").get(parameterPricing.getTaxContent);
+  app.route("/tax-mgt").get(parameterPricing.getTaxContent);
 
   // update membership option
-  app.route("/api/tax-mgt").put(apiToken, parameterPricing.updateTaxContent);
+  app.route("/tax-mgt").put(apiToken, parameterPricing.updateTaxContent);
 
   /**********  F R E I G H T - P R I C I N G  ******************/
 
   // add freight-pricing
   app
-    .route("/api/freight-pricing")
+    .route("/freight-pricing")
     .post(apiToken, parameterPricing.addFreightPricing);
 
   // update freight-pricing
   app
-    .route("/api/freight-pricing/:id")
+    .route("/freight-pricing/:id")
     .put(apiToken, parameterPricing.updateFreightPricing);
 
   // get singe freight-pricing
   app
-    .route("/api/freight-pricing/:id")
+    .route("/freight-pricing/:id")
     .get(apiToken, parameterPricing.getFreightPricing);
 
   // all freight-pricings
   app
-    .route("/api/freight-pricings")
+    .route("/freight-pricings")
     .get(apiToken, parameterPricing.allFreightPricings);
 
   /**********  G L O B E L -  S E T T I N G S  ******************/
 
   // update global setting
   app
-    .route("/api/update-global-setting")
+    .route("/update-global-setting")
     .put(apiToken, globalSettings.updateGlobalSettings);
 
   // get global setting
-  app
-    .route("/api/global-settings")
-    .get(apiToken, globalSettings.allGlobalSettings);
+  app.route("/global-settings").get(apiToken, globalSettings.allGlobalSettings);
 
   // get timezones
-  app.route("/api/all-timezones").get(apiToken, globalSettings.allTimezones);
+  app.route("/all-timezones").get(apiToken, globalSettings.allTimezones);
 
   /**********  S U P P L I E R S  ******************/
 
   // add supplier
-  app.route("/api/supplier").post(apiToken, manageSuppliers.addSupplier);
+  app.route("/supplier").post(apiToken, manageSuppliers.addSupplier);
 
   // update supplier
-  app.route("/api/supplier/:id").put(apiToken, manageSuppliers.updateSupplier);
+  app.route("/supplier/:id").put(apiToken, manageSuppliers.updateSupplier);
 
   // get singe supplier
-  app.route("/api/supplier/:id").get(apiToken, manageSuppliers.getSupplier);
+  app.route("/supplier/:id").get(apiToken, manageSuppliers.getSupplier);
 
   // all suppliers
-  app.route("/api/suppliers").get(apiToken, manageSuppliers.allSuppliers);
+  app.route("/suppliers").get(apiToken, manageSuppliers.allSuppliers);
 
   //---------------------------------------------------------------------------------------------
 
   // update membership option
-  app.route("/api/website-content").put(apiToken, api.updateWebsiteContent);
+  app.route("/website-content").put(apiToken, api.updateWebsiteContent);
 
   /**********  COMMON APIS  ******************/
 
   // change row status
-  app.route("/api/changeRowStatus/:id").post(apiToken, api.changeRowStatus);
+  app.route("/changeRowStatus/:id").post(apiToken, api.changeRowStatus);
 
   // delete row
-  app.route("/api/rowDelete/:id").delete(apiToken, api.rowDelete);
+  app.route("/rowDelete/:id").delete(apiToken, api.rowDelete);
 
   /**********  Customers  ******************/
-  app.route("/api/customers").get(api.getAllCustomers);
-  app.route("/api/providers").get(api.getAllProviders);
-  app.route("/api/edit-customer").get(api.editGetCustomer);
-  app.route("/api/delete-customer").delete(api.deleteCustomer);
-  app.route("/api/add-customer").post(api.addCustomer);
-  app.route("/api/edit_customer").put(api.editCustomer);
+  app.route("/customers").get(api.getAllCustomers);
+  app.route("/providers").get(api.getAllProviders);
+  app.route("/edit-customer").get(api.editGetCustomer);
+  app.route("/delete-customer").delete(api.deleteCustomer);
+  app.route("/add-customer").post(api.addCustomer);
+  app.route("/edit_customer").put(api.editCustomer);
 
   /****************************************************************************************************
 					W   E   B   S   I    T    E
 	******************************************************************************************************/
 
   // Sign Up
-  app.route("/api/web/auth/sign-up").post(webAuthApi.signUp);
+  app.route("/web/auth/sign-up").post(webAuthApi.signUp);
 
   // Forgot-Password
-  app.route("/api/forgot-password").post(webAuthApi.forgotPassword);
+  app.route("/forgot-password").post(webAuthApi.forgotPassword);
 
   // resend code
-  app.route("/api/web/auth/resend-code").put(apiToken, webAuthApi.resendCode);
+  app.route("/web/auth/resend-code").put(apiToken, webAuthApi.resendCode);
 
   // verify code
-  app.route("/api/web/auth/verify-code").post(apiToken, webAuthApi.verifyCode);
+  app.route("/web/auth/verify-code").post(apiToken, webAuthApi.verifyCode);
 
   /*
 	|--------------------------------------------------------------------------
@@ -550,53 +528,51 @@ module.exports = function (app) {
 	|------------------------------------------------------------------------ */
 
   // add
-  app.route("/api/article/wishlist").post(apiToken, webArticleApi.wishlist);
+  app.route("/article/wishlist").post(apiToken, webArticleApi.wishlist);
 
   // get wishlist
-  app.route("/api/article/wishlist").get(apiToken, webArticleApi.getWishlist);
+  app.route("/article/wishlist").get(apiToken, webArticleApi.getWishlist);
+
+  // delete wishlist
+  app.route("/article/wishlist").delete(apiToken, webArticleApi.deleteWishlist);
 
   // delete wishlist
   app
-    .route("/api/article/wishlist")
-    .delete(apiToken, webArticleApi.deleteWishlist);
-
-  // delete wishlist
-  app
-    .route("/api/article/single-wishlist")
+    .route("/article/single-wishlist")
     .delete(apiToken, webArticleApi.deleteSingleWishlist);
 
   /*************** RATING **************/
 
   // add
-  app.route("/api/article/rating").post(webArticleApi.rating);
+  app.route("/article/rating").post(webArticleApi.rating);
 
   // get ratings
-  app.route("/api/article/all-rating").get(webArticleApi.getAllRating);
+  app.route("/article/all-rating").get(webArticleApi.getAllRating);
 
   // get ratings
-  app.route("/api/article/rating").get(webArticleApi.getProductRating);
+  app.route("/article/rating").get(webArticleApi.getProductRating);
 
   // get ratings
-  app.route("/api/article/recommend").get(webArticleApi.getProductRecommend);
+  app.route("/article/recommend").get(webArticleApi.getProductRecommend);
 
   /******* QUESTION & ANSWER ( Article Single Page ) *******/
 
   // add
-  app.route("/api/article/qa").post(apiToken, webArticleApi.askQuestion);
+  app.route("/article/qa").post(apiToken, webArticleApi.askQuestion);
 
   // get ratings
-  app.route("/api/article/all-qas").get(webArticleApi.getAllQas);
+  app.route("/article/all-qas").get(webArticleApi.getAllQas);
 
   /**********  ARTICLES F A Q S  ******************/
 
   // all
-  app.route("/api/article-faqs").get(apiToken, api.allArticleFaqs);
+  app.route("/article-faqs").get(apiToken, api.allArticleFaqs);
 
   // get
-  app.route("/api/article-faq/:id").get(apiToken, api.getArticleFaq);
+  app.route("/article-faq/:id").get(apiToken, api.getArticleFaq);
 
   // get
-  app.route("/api/article-faq/:id").put(apiToken, api.updateArticleFaq);
+  app.route("/article-faq/:id").put(apiToken, api.updateArticleFaq);
 
   /*
 	|--------------------------------------------------------------------------
@@ -604,19 +580,19 @@ module.exports = function (app) {
 	|------------------------------------------------------------------------ */
 
   // add
-  app.route("/api/garage").post(apiToken, webGarageApi.addGarage);
+  app.route("/garage").post(apiToken, webGarageApi.addGarage);
 
   // edit
-  app.route("/api/garage").put(apiToken, webGarageApi.editGarage);
+  app.route("/garage").put(apiToken, webGarageApi.editGarage);
 
   // get wishlist
-  app.route("/api/garages").get(apiToken, webGarageApi.getGarages);
+  app.route("/garages").get(apiToken, webGarageApi.getGarages);
 
   // get garage
-  app.route("/api/garage/single/:id").get(apiToken, webGarageApi.getGarage);
+  app.route("/garage/single/:id").get(apiToken, webGarageApi.getGarage);
 
   // delete wishlist
-  app.route("/api/garage").delete(apiToken, webGarageApi.deleteGarage);
+  app.route("/garage").delete(apiToken, webGarageApi.deleteGarage);
 
   /*
 	|--------------------------------------------------------------------------
@@ -624,34 +600,32 @@ module.exports = function (app) {
 	|------------------------------------------------------------------------ */
 
   // add
-  app.route("/api/create/ticket").post(apiToken, webSupportTicket.addTicket);
+  app.route("/create/ticket").post(apiToken, webSupportTicket.addTicket);
 
   // get tickets
-  app.route("/api/tickets").get(apiToken, webSupportTicket.getTickets);
+  app.route("/tickets").get(apiToken, webSupportTicket.getTickets);
 
   // get ticket chat
-  app.route("/api/ticket/single").get(apiToken, webSupportTicket.getTicket);
+  app.route("/ticket/single").get(apiToken, webSupportTicket.getTicket);
 
   // get ticket
-  app.route("/api/ticket").get(apiToken, webSupportTicket.getTicketDetail);
+  app.route("/ticket").get(apiToken, webSupportTicket.getTicketDetail);
 
   // get ticket
-  app.route("/api/close/ticket").post(apiToken, webSupportTicket.closeTicket);
+  app.route("/close/ticket").post(apiToken, webSupportTicket.closeTicket);
 
   // get
-  app.route("/api/send-message").post(apiToken, webSupportTicket.sendMessage);
+  app.route("/send-message").post(apiToken, webSupportTicket.sendMessage);
 
   // contact us
-  app.route("/api/contact-us").post(webSupportTicket.contactUs);
+  app.route("/contact-us").post(webSupportTicket.contactUs);
 
   // contact us
-  app
-    .route("/api/notify-availability")
-    .post(webSupportTicket.notifyAvailability);
+  app.route("/notify-availability").post(webSupportTicket.notifyAvailability);
 
   // get tickets
   app
-    .route("/api/article-price-requests")
+    .route("/article-price-requests")
     .get(apiToken, webSupportTicket.getArticlePriceRequests);
 
   /*
@@ -660,10 +634,10 @@ module.exports = function (app) {
 	|------------------------------------------------------------------------ */
 
   // add
-  app.route("/api/checkout").post(apiToken, webCheckoutApi.checkout);
+  app.route("/checkout").post(apiToken, webCheckoutApi.checkout);
 
   // check coupon
-  app.route("/api/check/coupon").post(webCheckoutApi.checkCoupon);
+  app.route("/check/coupon").post(webCheckoutApi.checkCoupon);
 
   /*
 	|--------------------------------------------------------------------------
@@ -671,10 +645,10 @@ module.exports = function (app) {
 	|------------------------------------------------------------------------ */
 
   // all
-  app.route("/api/orders").get(apiToken, webOrderApi.getOrders);
+  app.route("/orders").get(apiToken, webOrderApi.getOrders);
 
   // single
-  app.route("/api/order-detail").get(apiToken, webOrderApi.getOrderDetail);
+  app.route("/order-detail").get(apiToken, webOrderApi.getOrderDetail);
 
   /****************************************************************************************************
 					S U P P L I E R S
@@ -686,29 +660,27 @@ module.exports = function (app) {
 |------------------------------------------------------------------------ */
 
   // add
-  app.route("/api/article").post(apiToken, supplierArticleApi.addArticle);
+  app.route("/article").post(apiToken, supplierArticleApi.addArticle);
 
   // import runt db
   app
-    .route("/api/import-articles")
+    .route("/import-articles")
     .post(apiToken, supplierArticleApi.importArticles);
 
   // update
-  app.route("/api/article/:id").put(apiToken, supplierArticleApi.updateArticle);
+  app.route("/article/:id").put(apiToken, supplierArticleApi.updateArticle);
 
   // approve article
   app
-    .route("/api/approve-article/:id")
+    .route("/approve-article/:id")
     .put(apiToken, supplierArticleApi.approveArticle);
 
   // single
-  app.route("/api/article/:id").get(supplierArticleApi.getArticle);
+  app.route("/article/:id").get(supplierArticleApi.getArticle);
 
   // delete
-  app
-    .route("/api/article/:id")
-    .delete(apiToken, supplierArticleApi.deleteArticle);
+  app.route("/article/:id").delete(apiToken, supplierArticleApi.deleteArticle);
 
   // all
-  app.route("/api/articles").get(supplierArticleApi.allArticles);
+  app.route("/articles").get(supplierArticleApi.allArticles);
 };

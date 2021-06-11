@@ -16,27 +16,32 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		supplierId: {
 			type: DataTypes.INTEGER(11),
-			allowNull: false,
+			allowNull: true,
 			field: 'supplier_id'
 		},
 		supplierName: {
 			type: DataTypes.STRING(191),
-			allowNull: false,
+			allowNull: true,
 			field: 'supplier_name'
 		},
-		price: {
+		priceFreeTax: {
 			type: DataTypes.STRING(191),
 			allowNull: false,
-			field: 'price'
+			field: 'priceFreeTax'
+		},
+    priceWithTax: {
+			type: DataTypes.STRING(191),
+			allowNull: false,
+			field: 'priceWithTax'
 		},
 		currency: {
 			type: DataTypes.STRING(191),
-			allowNull: false,
+			allowNull: true,
 			field: 'currency'
 		},
 		zoneNumber: {
 			type: DataTypes.INTEGER(11),
-			allowNull: false,
+			allowNull: true,
 			field: 'zone_number'
 		},
 		country: {
@@ -46,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		weight: {
 			type: DataTypes.STRING(191),
-			allowNull: false,
+			allowNull: true,
 			field: 'weight'
 		},
 		createdAt: {

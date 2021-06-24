@@ -14,6 +14,11 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false,
 			field: 'article_number'
 		},
+    articleOEM: {
+			type: DataTypes.STRING(191),
+			allowNull: true,
+			field: 'article_oem'
+		},
 		supplierId: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true,

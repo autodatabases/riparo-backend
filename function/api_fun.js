@@ -47,7 +47,7 @@ module.exports = {
 
   // getOtp
 
-  getOtp: async function () {
+  getOtp: function () {
     var op = Math.floor(100000 + Math.random() * 99999);
     return op;
   },
@@ -153,6 +153,7 @@ module.exports = {
   readHTMLFile: async function (path, callback) {
     fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
       if (err) {
+        return callback(null, "");
         throw err;
         callback(err);
       } else {
@@ -173,7 +174,7 @@ module.exports = {
     });
 
     this.readHTMLFile(
-      "server/views/email_templates/" + template,
+      `${__dirname}server/views/email_templates/` + template,
       function (err, html) {
         var template = handlebars.compile(html);
 

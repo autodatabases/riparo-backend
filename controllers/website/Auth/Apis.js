@@ -66,7 +66,7 @@ module.exports = {
         return false;
       }
 
-      var code = await fun.getOtp();
+      var code = fun.getOtp();
 
       if (requestData.userType === "Customer") {
         var status = "Active";
@@ -232,7 +232,7 @@ module.exports = {
         },
       });
 
-      var code = await fun.getOtp();
+      var code = fun.getOtp();
 
       updateData = await User.update(
         { verificationCode: code },

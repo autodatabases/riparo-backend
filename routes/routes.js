@@ -635,6 +635,7 @@ module.exports = function (app) {
 
   // add
   app.route("/checkout").post(apiToken, webCheckoutApi.checkout);
+  app.route("/orderCallback").get(webCheckoutApi.orderCallback);
 
   // check coupon
   app.route("/check/coupon").post(webCheckoutApi.checkCoupon);
@@ -645,7 +646,7 @@ module.exports = function (app) {
 	|------------------------------------------------------------------------ */
 
   // all
-  app.route("/orders").get(apiToken, webOrderApi.getOrders);
+  app.route("/orders").get(apiToken, webOrderApi.getAllOrders);
 
   // single
   app.route("/order-detail").get(apiToken, webOrderApi.getOrderDetail);

@@ -11,6 +11,8 @@ const ENV_VARS = [
   "DB_HOST",
   "DB_DIALECT",
   "DB_OPERATOR_ALIASES",
+  "DOMAIN_URL",
+  "MERCADO_PAGO_ACCESS_TOKEN",
 ];
 
 let content = "";

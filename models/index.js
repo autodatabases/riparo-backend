@@ -19,6 +19,8 @@ const sequelize = new Sequelize(
   }
 );
 
+sequelize.sync();
+
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (

@@ -1,87 +1,87 @@
-const db = require('../../../models');
-var dateFormat = require('dateformat');
-const sequelize = require('sequelize');
-var jwt = require('jsonwebtoken');
+const db = require("../../../models");
+var dateFormat = require("dateformat");
+const sequelize = require("sequelize");
+var jwt = require("jsonwebtoken");
 const Op = sequelize.Op;
-var moment = require('moment');
-var crypto = require('crypto');
-const fun = require('../../../function/api_fun.js');
-const fs = require('fs');
-const FileType = require('file-type');
+var moment = require("moment");
+var crypto = require("crypto");
+const fun = require("../../../function/api_fun.js");
+const fs = require("fs");
+const FileType = require("file-type");
 const current_time = Math.floor(Date.now() / 1000);
-const readXlsxFile = require('read-excel-file/node');
-var SqlString = require('sqlstring');
+const readXlsxFile = require("read-excel-file/node");
+var SqlString = require("sqlstring");
 
 /******** MODELS ***********/
 const Orders = db.orders;
 const User = db.users;
 
 module.exports = {
+  // GET ORDERS
 
-  // get
-  getOrders: async function (req, res) {
+  getAllOrders: async function (req, res) {
     try {
-
       let whereCond = {};
-
       // Pagination
       var page = 1;
-      if(req.query.page){
+      if (req.query.page) {
         page = req.query.page;
       }
 
-      var limit = 2;
-      if(req.query.limit){
+      var limit = 10;
+      if (req.query.limit) {
         limit = Number(req.query.limit);
       }
 
-      // User orders
-      if(req.query.userId){
-        whereCond.userId =  req.query.userId
-      }
+      const offset = (page - 1) * Number(limit);
 
-      // Supplier orders
-      if(req.query.supplierId){
-        whereCond.supplierId =  req.query.supplierId
+      // search
+      var search = "";
+      if (req.query.search) {
+        whereCond.orderNumber = { [Op.like]: "" + req.query.search + "%" };
       }
-
-      const offset = (page-1) * Number(limit);
 
       // total records
 
-      allData = await Orders.findAndCountAll({where:whereCond});
-      const totalPages = Math.ceil(allData.count/limit);
+      allOptions = await Orders.findAndCountAll({ where: whereCond });
+      const totalPages = Math.ceil(allOptions.count / limit);
 
-      var allDataP = {};
-      allDataP = await Orders.findAll({
-          limit,offset,
-          where: whereCond,
-          raw:true,
-          nest:true,
-          group:['refPayco'],
-          order: [
-            ['id', 'DESC']
-          ]
+      var allOptionsP = {};
+      allOptionsP = await Orders.findAll({
+        attributes: [
+          "id",
+          "orderNumber",
+          "total",
+          "merchantOrder",
+          "orderStatus",
+          [
+            sequelize.fn("date_format", sequelize.col("createdAt"), "%Y-%m-%d"),
+            "createdAt",
+          ],
+        ],
+        limit,
+        offset,
+        where: whereCond,
+        // Add order conditions here....
+        order: [["id", "DESC"]],
       });
 
-      if(allDataP){
+      if (allOptions) {
+        const _metadata = {
+          totalRecords: allOptions.count,
+          totalPages: totalPages,
+        };
 
-        for(var i=0; i < allDataP.length; i++){
-
-          allDataP[i].userDetails =  await User.findOne({
-                                      where:{
-                                        id:allDataP[i].userId,
-                                      },
-                                      raw: true
-                                    });
-
-        }
-
-        const _metadata = { 'totalRecords' : allData.count , 'totalPages' : totalPages  }
-
-        return fun.returnResponse(res,true,200,"Success",allDataP,_metadata);
+        return fun.returnResponse(
+          res,
+          true,
+          200,
+          "All Orders",
+          allOptionsP,
+          _metadata
+        );
       } else {
-        return fun.returnResponse(res,false,204,"No Data.");
+        return fun.returnResponse(res, false, 204, "No orders Options.");
         return false;
       }
     } catch (error) {
@@ -93,44 +93,47 @@ module.exports = {
 
   getOrderDetail: async function (req, res) {
     try {
-
       // id valid
       var IsValid = {};
       IsValid = await Orders.findOne({
-        where:{
-          refPayco:req.query.id,
-        }
-      });
-
-      if (!IsValid) return fun.returnResponse(res,false,202,"Order id with "+ req.query.id +" not found.");
-
-      var order ={};
-      order = await Orders.findAll({
-        where:{
-          refPayco : req.query.id
+        where: {
+          refPayco: req.query.id,
         },
-        raw: true
       });
 
-      if(order){
+      if (!IsValid)
+        return fun.returnResponse(
+          res,
+          false,
+          202,
+          "Order id with " + req.query.id + " not found."
+        );
 
-        for(var i=0; i < order.length; i++){
+      var order = {};
+      order = await Orders.findAll({
+        where: {
+          refPayco: req.query.id,
+        },
+        raw: true,
+      });
 
+      if (order) {
+        for (var i = 0; i < order.length; i++) {
           order[i].userDetails = await User.findOne({
-                                      where:{
-                                        id:order[i].userId,
-                                      },
-                                      raw: true
-                                    });
+            where: {
+              id: order[i].userId,
+            },
+            raw: true,
+          });
         }
 
-          return fun.returnResponse(res,true,200,"Order",order);
+        return fun.returnResponse(res, true, 200, "Order", order);
       } else {
-        return fun.returnResponse(res,false,500,"Something went wrong.");
+        return fun.returnResponse(res, false, 500, "Something went wrong.");
         return false;
       }
     } catch (error) {
       throw error;
     }
   },
-}
+};
